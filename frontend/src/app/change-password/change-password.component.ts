@@ -67,8 +67,6 @@ export class ChangePasswordComponent {
         /(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{12,30}/
       )
     ) {
-      this.error =
-        "The password does not meet corporate policy requirements for privileged accounts.";
     }
     this.userService
       .changePassword({
@@ -80,18 +78,12 @@ export class ChangePasswordComponent {
         (response: any) => {
           this.error = undefined;
           this.translate.get("PASSWORD_SUCCESSFULLY_CHANGED").subscribe(
-            (passwordSuccessfullyChanged) => {
-              this.confirmation = `Password successfully changed!`;
-            },
-            (translationId) => {
-              this.confirmation = `Password successfully changed.`;
-            }
+            (passwordSuccessfullyChanged) => {},
+            (translationId) => {}
           );
           this.resetForm();
         },
         (error) => {
-          this.error = `Failed to change password. Please try again.`;
-          this.confirmation = undefined;
           this.resetPasswords();
         }
       );
